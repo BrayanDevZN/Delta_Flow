@@ -7,7 +7,7 @@ Cria todos os caminhos
 import os
 
 
-class FolderControl:
+class Init:
 
     def __init__(self, level:str,logger:Logs, path:str = None) -> None:
 
