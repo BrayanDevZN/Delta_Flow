@@ -6,23 +6,31 @@ import logging
 
 #Controla os logs
 class Logs:
-    def __init__(self, path:str)->None:
+    def __init__(self, path:str = None)->None:
 
-                #Configuração baisca
-                logging.basicConfig(
-                level=logging.INFO,
-                format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
-                handlers=[
-                    logging.FileHandler(f"{path}/logs/app.logs"),
-                    logging.StreamHandler()
-                ]
-            )
+                
+                #Caminho pra salvar os logs
+                self.path = path
 
-                #Variavel que carrega a configração
-                self.log = logging.getLogger(__name__)
+    #Configuração basica
+    def config(self):
+            
+            logging.basicConfig(
+                            level=logging.INFO,
+                            format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
+                            handlers=[
+                                logging.FileHandler(f"{self.path}/logs/app.log" if self.path is not None else "logs/app.log"),
+                                logging.StreamHandler()
+                            ]
+                        )
 
+            
+
+        
+
+        
     #Retorna a variavel que pega a configuração  
     def logger(self) -> logging:
-            return self.log
+            return logging.getLogger("DeltaFlow")
             
 
