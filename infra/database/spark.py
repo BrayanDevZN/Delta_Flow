@@ -16,6 +16,8 @@ class SparkDb:
         #objeto spark
         self.session = session
 
+        self.session.sparkContext.setLogLevel("ERROR")
+
         log.config()
 
         self.logger = log.logger()
