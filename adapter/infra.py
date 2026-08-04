@@ -9,7 +9,7 @@ from domain.module import Valid_Engine, RoleEngine
 from sqlalchemy import Engine
 import pandas as pd
 from pyspark.sql import DataFrame
-class Engine:
+class EngineDb:
 
     def __init__(self, eng:str, data:dict, log:ifr.Logs)->None:
 
@@ -48,8 +48,25 @@ class Engine:
         args = self.role.read(name=name, query=query)
 
         #Executa
-        data = self.instance.read(**args)
+        data = self.instance.read(**args) if not isinstance(self.instance, ifr.QueryDb) else self.instance.query(**args)
 
         return data
 
+    #Salva os dados
+    def save(self, name:str=None, query:str=None, df:ifr.SparkDb|ifr.PandasDb=None):
 
+        #argumentos
+        args = self.role.save(name=name, query=query, df=df)
+
+         #Executa
+        data = self.instance.save(**args) if not isinstance(self.instance, ifr.QueryDb) else self.instance.query(**args)
+
+        return data
+        
+
+
+
+    
+    
+
+    
