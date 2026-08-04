@@ -6,22 +6,29 @@ Serve para fazer requisições para outras apis
 
 import requests
 
-
-def request(url:str, log:Logs) ->dict:
-
-    try:
+class request:
+    def __init__(self, url:str, log:Logs):
+        self.url = url
 
         log.config()
 
-        logger = log.logger()
+        self.log = log.logger()
 
-        logger.info(f"Fazendo requisição para {url}...")
+#Faz a requisição
+        
+def read(self) ->dict:
 
-        response = requests.get(url=url)
+    try:
+
+      
+
+        self.logger.info(f"Fazendo requisição para {self.url}...")
+
+        response = requests.get(url=self.url)
 
         if response.status_code != 200:
 
-            logger.error(f"Houve um erro em {url} | status: {response.status_code}")
+            self.logger.error(f"Houve um erro em {self.url} | status: {response.status_code}")
 
         {"status": response.status_code, "data": response.json()}
 
