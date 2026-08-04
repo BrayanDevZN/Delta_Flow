@@ -6,6 +6,9 @@ controla e adapta toda camada infra
 
 import infra.module as ifr
 from domain.module import Valid_Engine, RoleEngine
+from sqlalchemy import Engine
+import pandas as pd
+from pyspark.sql import DataFrame
 class Engine:
 
     def __init__(self, eng:str, data:dict, log:ifr.Logs)->None:
@@ -39,7 +42,7 @@ class Engine:
 
 
     #Pega os dados
-    def read(self, name:str=None, query:str=None):
+    def read(self, name:str=None, query:str=None)-> pd.DataFrame|DataFrame|Engine|dict:
 
         #Valida os parametros
         args = self.role.read(name=name, query=query)
